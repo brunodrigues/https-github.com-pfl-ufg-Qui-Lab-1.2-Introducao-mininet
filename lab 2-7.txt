@@ -1,0 +1,44 @@
+mininet@mininet-vm:~$ sudo mn --link tc,bw=100,delay=5ms
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+h1 h2  
+*** Adding switches:
+s1 
+*** Adding links:
+(100.00Mbit 5ms delay) (100.00Mbit 5ms delay) (h1, s1) (100.00Mbit 5ms delay) (100.00Mbit 5ms delay) (h2, s1) 
+*** Configuring hosts
+h1 h2 
+*** Starting controller
+c0 
+*** Starting 1 switches
+s1 ...(100.00Mbit 5ms delay) (100.00Mbit 5ms delay) 
+*** Starting CLI:
+mininet> h1 ping h2
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=40.4 ms
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=22.3 ms
+64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=22.0 ms
+64 bytes from 10.0.0.2: icmp_seq=4 ttl=64 time=22.0 ms
+64 bytes from 10.0.0.2: icmp_seq=5 ttl=64 time=22.4 ms
+^C
+--- 10.0.0.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 20.398/21.711/23.786/1.251 ms
+mininet> h2 ping h1
+PING 10.0.0.1 (10.0.0.1) 56(84) bytes of data.
+64 bytes from 10.0.0.1: icmp_seq=1 ttl=64 time=22.1 ms
+64 bytes from 10.0.0.1: icmp_seq=2 ttl=64 time=21.3 ms
+64 bytes from 10.0.0.1: icmp_seq=3 ttl=64 time=21.2 ms
+64 bytes from 10.0.0.1: icmp_seq=4 ttl=64 time=21.7 ms
+64 bytes from 10.0.0.1: icmp_seq=5 ttl=64 time=20.2 ms
+^C
+--- 10.0.0.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4007ms
+rtt min/avg/max/mdev = 20.704/21.471/22.351/0.625 ms
+mininet> iperf
+*** Iperf: testing TCP bandwidth between h1 and h2 
+*** Results: ['94. Mbits/sec', '111 Mbits/sec']
+mininet> iperfudp
+*** Iperf: testing UDP bandwidth between h1 and h2 
+*** Results: ['10M', '10.0 Mbits/sec', '10.0 Mbits/sec']
